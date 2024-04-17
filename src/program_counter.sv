@@ -1,18 +1,13 @@
 // Paul-John Clet
 // Advanced VLSI Design - Final Project: Branch Prediction
 
-
 `timescale 1ns / 1ps
 
-// PC
+// PC - holds the program count for the instruction queue to read
 module program_counter (input logic clk, prediction, flush_pipeline,
 								input logic [31:0] BTB_address, true_address,
 								
 								output logic [31:0] next_PC);
-
-//	logic [7:0] PC; // current program counter
-	
-//	assign next_PC = PC;
 	
 	initial begin
 		next_PC = 8'b0;
@@ -23,7 +18,6 @@ module program_counter (input logic clk, prediction, flush_pipeline,
 			$display("[EXIT] Finishing program.");
 			$stop;
 		end
-	
 	
 		if (flush_pipeline) begin
 			$display("[PC] Flushed pipeline");

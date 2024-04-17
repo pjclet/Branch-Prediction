@@ -3,7 +3,7 @@
 
 `timescale 1ns / 1ps
 
-// branch predictor
+// gskew predictor, outputs the branch prediction based on majority vote from hashed pht entries
 module gskew_predictor (input logic clk, input logic [2:0] pc, ghr,
 								output logic prediction, new_prediction); // program counter and global history register
 	
@@ -44,11 +44,6 @@ module gskew_predictor (input logic clk, input logic [2:0] pc, ghr,
 	end
 	
 	// when the branch is decided (in execution), we update the PHT
-//	always @(posedge branch) begin
-//		
-//		
-//		
-//	end
-	
+	// would like to update this in future work
 	
 endmodule

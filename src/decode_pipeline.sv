@@ -3,7 +3,7 @@
 
 `timescale 1ns / 1ps
 
-// decode stage (ID)
+// decode stage (ID) - decode the received instruction
 module decode_pipeline (input logic clk, 
 								input logic [31:0] instr_in, current_PC,
 								
@@ -41,8 +41,7 @@ module decode_pipeline (input logic clk,
 			rs2 = instr_in[24:20];
 			rd = instr_in[11:7];
 			$display("[DECODE] Registers output: rd = $r%0d, rs1 = $r%0d, rs2 = $r%0d", rd, rs1, rs2);
-			// ***** - maybe have data sent immediately
-			
+
 			is_add = 1'b1;
 		end
 		// branch instruction - BNE
@@ -72,7 +71,5 @@ module decode_pipeline (input logic clk,
 			is_nop <= 1'b1;
 		end
 	end
-
-	
 	
 endmodule

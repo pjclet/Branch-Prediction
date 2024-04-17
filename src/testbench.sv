@@ -3,6 +3,7 @@
 
 `timescale 1ns / 1ps
 
+// run the clock and output the current clock cycle
 module testbench;
 
 	logic clk;
@@ -27,7 +28,6 @@ module testbench;
 	always @(negedge clk) begin
 		cycle = cycle + 1;
 		$display("------------------------- [CLK] Cycle #%0d -------------------------", cycle);
-		
 	end
 	
 endmodule

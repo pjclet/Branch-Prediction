@@ -3,7 +3,7 @@
 
 `timescale 1ns / 1ps
 
-// branch target buffer
+// branch target buffer - hold addresses for PC jumps
 module branch_target_buffer (input logic clk, 
 									  input logic [31:0] pc, // get full 32 bits of the PC
 									  
@@ -19,10 +19,7 @@ module branch_target_buffer (input logic clk,
 	
 	initial begin
 		// pre load the BTB
-		$readmemb("btb.txt", BTB);
-//		for (int i = 0; i < 8; i++) begin
-//			BTB[i] = 62'b0;
-//		end
+		$readmemb("btb.txt", BTB); // load btb to always jump
 		target_address = 32'b0; hit = 1'b0;
 		$display("[BP] Initialized and pre-loaded BTB.");
 	end
@@ -47,11 +44,11 @@ module branch_target_buffer (input logic clk,
 		end
 	end 
 	
+	// ability to update the BTB
 	always @(posedge valid_tag_and_target) begin
 		// update entry, use the last three of the received PC address (in tag_and_target_address) as the index
 		
 		BTB[tag_and_target_address[34:32]] = {1'b1, tag_and_target_address[63:35], tag_and_target_address[31:0]};
-		
 		$display("[BTB] Updated BTB with a new entry: %d - %h", tag_and_target_address[34:32], BTB[tag_and_target_address[34:32]]);
 		
 	end

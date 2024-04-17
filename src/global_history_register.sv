@@ -3,7 +3,7 @@
 
 `timescale 1ns / 1ps
 
-// global history register
+// global history register - shift register to listen to all the branch decisions
 module global_history_register (input logic clk, branch_decision, new_branch_decision, // probably do not need clock here
 										  output logic [7:0] register_output);
 

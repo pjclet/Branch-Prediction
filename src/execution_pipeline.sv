@@ -55,21 +55,16 @@ module execution_pipeline (input logic clk,
 	
 		// reset the flush
 		flush_pipeline = 1'b0;
-		
-		
-//		#3;
-//		#4;
-		
-	
-		
+
 		// try executing the instructions
+		// ADD instruction
 		if (is_add) begin
 			// perform the addition, update the register file, then display the output
-			
 			RF[rd] = RF[rs1] + RF[rs2];
 			$display("[EX] Added $r%0d and $r%0d, saving it to $r%0d -> %0d", rs1, rs2, rd, RF[rd]);
-			
 		end 
+
+		// BNE instruction
 		else if (is_branch) begin
 			// check the branch condition, then check against the four cases
 			$display("[EX] Processing BNE instruction.");
@@ -116,6 +111,7 @@ module execution_pipeline (input logic clk,
 			new_branch_decision = 1'b1; #1; new_branch_decision = 1'b0;
 		end
 		
+		// JAL instruction (link to 0x0000)
 		else begin if (is_jump) begin
 			// resolve the address to jump to, then take the branch
 			
@@ -126,22 +122,12 @@ module execution_pipeline (input logic clk,
 				tag_and_target_address = {current_PC, next_address}; // send all 64 bits
 				valid_tag_and_target = 1'b1; #1; valid_tag_and_target = 1'b0;
 			end
-			// if predicted not taken, then flush the pipeline and take the branch
-//			else begin
-//			end
-			
 				$display("[EX] Misprediction - Jump not taken.");
-				
 				next_PC = next_address;
 				flush_pipeline = 1'b1;
 			end
-			
-			
-			
 			
 		end
 	end
 	
 endmodule
-
-

@@ -3,12 +3,8 @@
 
 `timescale 1ns / 1ps
 
-// toplevel module
+// toplevel module - put together all the signals
 module branch_prediction (input logic clk);
-	
-	
-//// IQ module
-//	instr_queue iq (.clk(clk), .dispatch_1_ready(dispatch_1_ready), .dispatch_2_ready(dispatch_2_ready), .instr1(instr1), .instr2(instr2), .instr_queue_empty(instr_queue_empty));	
 	
 	// ---------- program counter (PC) ----------
 	

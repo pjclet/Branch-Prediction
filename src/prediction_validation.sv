@@ -3,7 +3,7 @@
 
 `timescale 1ns / 1ps
 
-// prediction validation
+// prediction validation - and gate between HIT from BTB and Gskew predictor
 module prediction_validation (input logic clk, gskew_prediction, new_prediction, hit, // probably do not need clock here
 										output logic final_prediction);
 
